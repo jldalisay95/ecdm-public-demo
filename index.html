@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Draft public demonstration of the RA7305 Hazard Exposure Documentation Model." />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>RA7305-HEDM | Draft Public Demonstration</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <div class="draft-banner" role="status">
+      <strong>DRAFT RESEARCH PROTOTYPE</strong>
+      <span>Not an official government system. Not for entitlement, approval, payroll, or payment decisions.</span>
+    </div>
+
+    <header class="site-header">
+      <div>
+        <p class="eyebrow">RA 7305 documentation and decision support</p>
+        <h1>RA7305-HEDM</h1>
+        <p class="header-copy">Hazard Exposure Documentation Model · Public demonstration v0.2</p>
+      </div>
+      <div class="privacy-chip" aria-label="Data handling statement">
+        <span aria-hidden="true">◌</span>
+        <div><strong>No saved records</strong><small>Inputs stay in this browser tab</small></div>
+      </div>
+    </header>
+
+    <nav class="tabs" aria-label="Application sections">
+      <button class="tab-button active" type="button" data-tab="assessment">Assessment</button>
+      <button class="tab-button" type="button" data-tab="results">Results</button>
+      <button class="tab-button" type="button" data-tab="policy">Policy basis</button>
+      <button class="tab-button" type="button" data-tab="about">About and limits</button>
+    </nav>
+
+    <main>
+      <section class="notice critical" aria-labelledby="warning-title">
+        <div>
+          <p class="notice-label">Required warning</p>
+          <h2 id="warning-title">Use synthetic or fictional information only</h2>
+          <p>Do not enter names, employee numbers, medical information, payroll records, or other personal data. This demonstration does not establish legal entitlement, constitute DOH approval, or authorize payment.</p>
+        </div>
+      </section>
+
+      <section id="assessment" class="tab-panel active" tabindex="-1">
+        <div class="section-heading">
+          <div><p class="eyebrow">One employee–assignment–month</p><h2>Assessment record</h2></div>
+          <div class="button-row">
+            <button id="load-example" class="button secondary" type="button">Load synthetic example</button>
+            <button id="clear-all" class="button quiet" type="button">Clear</button>
+          </div>
+        </div>
+
+        <form id="assessment-form" novalidate>
+          <div class="form-grid">
+            <label>Assessment ID<input id="assessmentId" autocomplete="off" placeholder="SYN-01" /></label>
+            <label>Assessment month<input id="month" type="month" /></label>
+            <label class="span-2">Assignment or work unit<input id="workUnit" autocomplete="off" placeholder="Synthetic City Health Clinic" /></label>
+            <label>Position or title<input id="position" autocomplete="off" placeholder="Nurse I (synthetic)" /></label>
+            <label>Salary grade<input id="salaryGrade" type="number" min="1" max="32" step="1" /></label>
+            <label>Work status<select id="workStatus"><option value="">Select</option><option>Full-time</option><option>Part-time</option></select></label>
+            <label>FTE monthly basic salary (PHP)<input id="salary" type="number" min="0" step="0.01" /></label>
+            <label>Authorized working hours (Wm)<input id="workingHours" type="number" min="0" step="0.01" /></label>
+            <label>Wm evidence reference<input id="workingHoursRef" autocomplete="off" placeholder="SYN-DUTY-01" /></label>
+            <label>Covered government health establishment<select id="establishmentCoverage"><option>Unresolved</option><option>Yes</option><option>No</option></select></label>
+            <label>Covered public health worker<select id="workerCoverage"><option>Unresolved</option><option>Yes</option><option>No</option></select></label>
+            <label>Excluded days under JC item 3.6<input id="excludedDays" type="number" min="0" step="1" /></label>
+            <label>Agency head or LCE determination<select id="determination"><option>Missing</option><option>Pending</option><option>Approved</option></select></label>
+            <label>Determination reference<input id="determinationRef" autocomplete="off" placeholder="Required if approved" /></label>
+            <label>DOH approval<select id="dohApproval"><option>Missing</option><option>Pending</option><option>Approved</option></select></label>
+            <label>DOH approval reference<input id="dohApprovalRef" autocomplete="off" placeholder="Required if approved" /></label>
+            <label>Authorized high/low label<select id="classification"><option>Not specified</option><option>High</option><option>Low</option><option>Unresolved</option></select></label>
+            <label>Classification reference<input id="classificationRef" autocomplete="off" placeholder="Required only for High or Low" /></label>
+          </div>
+
+          <div class="section-heading task-heading">
+            <div><p class="eyebrow">Actual task evidence</p><h2>Exposure log</h2></div>
+            <button id="add-entry" class="button secondary" type="button">Add exposure entry</button>
+          </div>
+          <p class="helper">Use one row for each non-overlapping interval or confirmed unique-hours block. Direct hours and start/end times must not be entered in the same row.</p>
+
+          <div class="table-wrap">
+            <table id="exposure-table">
+              <thead><tr><th>Entry</th><th>Date</th><th>Actual task</th><th>Time or unique hours</th><th>JC 3.2 code</th><th>Pathway</th><th>Evidence</th><th>Confirmed</th><th>Check</th><th><span class="visually-hidden">Actions</span></th></tr></thead>
+              <tbody id="exposure-body"></tbody>
+            </table>
+          </div>
+        </form>
+
+        <div class="sticky-action"><button id="review-results" class="button primary" type="button">Review documentary result</button><p>Calculation runs in this tab. Nothing is submitted or saved.</p></div>
+      </section>
+
+      <section id="results" class="tab-panel" tabindex="-1">
+        <div class="section-heading"><div><p class="eyebrow">Explainable review status</p><h2>Documentary result</h2></div><button id="print-summary" class="button secondary" type="button">Print summary</button></div>
+        <div class="result-layout">
+          <article class="status-card" id="status-card"><p class="notice-label">Current status</p><h3 id="status-text">INCOMPLETE—MANUAL REVIEW</h3><p id="status-explanation">Complete the assessment to see the documentary result.</p></article>
+          <div class="metrics" aria-label="Calculated results">
+            <div><span>Documented hours (Hm)</span><strong id="metric-hm">0.00</strong></div>
+            <div><span>Authorized hours (Wm)</span><strong id="metric-wm">0.00</strong></div>
+            <div><span>Exposure ratio (Em)</span><strong id="metric-em">n.a.</strong></div>
+            <div><span>Official SG rate</span><strong id="metric-rate">n.a.</strong></div>
+          </div>
+        </div>
+
+        <div class="result-grid">
+          <article class="panel"><h3>Review findings</h3><ul id="finding-list" class="finding-list"></ul></article>
+          <article class="panel amount-panel"><p class="notice-label">Conditional policy-rate estimate</p><p id="estimate" class="estimate">Not displayed</p><p id="estimate-note">An amount appears only when every documentary and approval gate is met.</p></article>
+        </div>
+
+        <article class="notice critical print-warning"><strong>DRAFT—NOT FOR OFFICIAL USE.</strong> This output is a research-prototype documentary record. It does not establish entitlement, constitute DOH approval, or authorize payment.</article>
+      </section>
+
+      <section id="policy" class="tab-panel" tabindex="-1">
+        <div class="section-heading"><div><p class="eyebrow">Policy-to-field traceability</p><h2>Policy basis</h2></div></div>
+        <div class="policy-grid">
+          <article class="panel"><h3>Coverage and authorization</h3><p>Coverage must be confirmed under RA 7305 and its Revised Implementing Rules and Regulations. Required determinations and approvals remain with authorized officials.</p><a href="https://lawphil.net/statutes/repacts/ra1992/ra_7305_1992.html" target="_blank" rel="noopener noreferrer">Republic Act No. 7305</a></article>
+          <article class="panel"><h3>Exposure threshold</h3><p>The model documents qualifying exposure for at least 50% of authorized working hours. It does not measure clinical dose, severity, or probability.</p><a href="https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/11/50646" target="_blank" rel="noopener noreferrer">Revised implementing rules</a></article>
+          <article class="panel"><h3>Current rate schedule</h3><p>The salary-grade rate is an exact lookup from DBM–DOH Joint Circular No. 1, s. 2016. The application does not interpolate or create new rates.</p><a href="https://www.dbm.gov.ph/wp-content/uploads/Issuances/2016/Joint%20Circular/JOINT%20CIRCULAR%20No.1S.2016_DBM-DOH_%20AMENDMENT%20TO%20DBM-DOH%20JOINT%20CIRCULAR%20NO.%201%20S.%202012.pdf" target="_blank" rel="noopener noreferrer">DBM–DOH Joint Circular No. 1, s. 2016</a></article>
+          <article class="panel"><h3>Judicial interpretation</h3><p>The application excludes the invalidated 2012 high/low exposure-day rate matrix. A recorded high/low label does not change the 2016 salary-grade rate.</p><a href="https://lawphil.net/judjuris/juri2015/jul2015/gr_207145_2015.html" target="_blank" rel="noopener noreferrer">Cawad v. Abad, G.R. No. 207145</a></article>
+        </div>
+        <article class="notice"><strong>Policy review date:</strong> 21 August 2026. Later laws, circulars, jurisprudence, or authorized interpretations may require the model to be revised.</article>
+      </section>
+
+      <section id="about" class="tab-panel" tabindex="-1">
+        <div class="section-heading"><div><p class="eyebrow">Public demonstration boundaries</p><h2>About this prototype</h2></div></div>
+        <div class="about-grid">
+          <article class="panel"><h3>What it demonstrates</h3><ul><li>Task-level exposure documentation</li><li>Unique-hours calculation and overlap flags</li><li>Coverage, exclusion, threshold, and approval gates</li><li>Official salary-grade rate lookup</li><li>Explainable status and printable summary</li></ul></article>
+          <article class="panel"><h3>What it does not do</h3><ul><li>Determine legal entitlement</li><li>Approve hazard allowance or payment</li><li>Replace agency, LCE, DOH, budget, accounting, or audit review</li><li>Store or transmit an assessment</li><li>Connect to HR or payroll systems</li></ul></article>
+          <article class="panel"><h3>Data handling</h3><p>The application has no database, sign-in, cookies, analytics, uploads, or browser-storage code. Inputs exist only in the open page and are lost when the page is refreshed or closed. Hosting providers may retain ordinary access or security logs.</p></article>
+          <article class="panel"><h3>Institutional adaptation</h3><p>An institution should first inventory its existing authorized procedure. Use of real employee records would require a separate privacy, security, legal, records-management, procurement, and institutional-governance assessment.</p></article>
+        </div>
+      </section>
+    </main>
+
+    <footer><p>RA7305-HEDM public demonstration v0.2 · Draft research prototype · No official endorsement or adoption is implied.</p></footer>
+    <script type="module" src="src/app.js"></script>
+  </body>
+</html>
