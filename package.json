@@ -1,6 +1,6 @@
 {
   "name": "ecdm-public-demo",
-  "version": "0.2.0-draft",
+  "version": "0.1.0-draft",
   "private": true,
   "type": "module",
   "scripts": {
