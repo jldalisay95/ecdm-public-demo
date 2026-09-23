@@ -1,10 +1,10 @@
-# RA7305-HEDM Public Demonstration
+# ECDM Public Demonstration
 
 > **DRAFT RESEARCH PROTOTYPE — NOT FOR OFFICIAL USE**
 >
 > This application does not establish legal entitlement, constitute DOH approval, determine final eligibility, authorize hazard-allowance payment, or represent an official system of Mandaluyong City or any Philippine government institution.
 
-RA7305-HEDM is a static, browser-based demonstration of a hazard exposure documentation and decision-support process for public health workers. It links task records, policy-listed hazardous circumstances, unique exposure hours, evidence references, coverage status, and approval status in one explainable assessment.
+ECDM is a static, browser-based demonstration of a hazard exposure documentation and decision-support process for public health workers. It links task records, policy-listed hazardous circumstances, unique exposure hours, evidence references, coverage status, and approval status in one explainable assessment.
 
 ## Data handling
 
